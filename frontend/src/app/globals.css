@@ -7,6 +7,10 @@
   --foreground: #171717;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -24,4 +28,13 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.bg-p1 {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("./home/home.jpg"); 
+  /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%); */
 }
