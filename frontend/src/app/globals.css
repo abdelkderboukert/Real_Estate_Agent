@@ -18,6 +18,18 @@
   }
 }
 
+@font-face {
+  font-family: Protest Strike ;
+  src: url(./fonts/ProtestStrike-Regular.ttf);
+}
+
+.protest-strike-regular {
+  font-family: "Protest Strike", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -37,4 +49,27 @@ body {
   background-size: cover;
   background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("./home/home.jpg"); 
   /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%); */
+}
+
+.bg-p2 {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("./home/p2.jpg"); 
+  /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%); */
+}
+
+.bg-logo {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("./_auti/OIG32.png"); 
+  /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%); */
+}
+
+.line {
+  transform: scaleY(1);
+  transition: transform 0.3s ease-in-out;
 }

@@ -29,6 +29,16 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} bg-background antialiased`}
       >
         {children}
+        <script
+          async
+          type="module"
+          src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+        ></script>
+        <script
+          async
+          noModule
+          src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+        ></script>
       </body>
     </html>
   );
