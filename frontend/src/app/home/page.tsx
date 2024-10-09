@@ -1,8 +1,9 @@
 "use client";
-import React from 'react'
-import Header from '../_auti/header'
-import Link from 'next/link';
-import { useState } from 'react';
+import React from "react";
+import Header from "../_auti/header";
+import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function Page() {
   interface DefaultV {
@@ -29,14 +30,32 @@ export default function Page() {
   const handleChange1 = (event: React.ChangeEvent<HTMLSelectElement>) => {
     console.log("handleChange1 called with:", event.target.value);
     setdefaultV({ ...defaultV, type: event.target.value as string });
-    
   };
 
-  // const handleSelect = (option: string) => {
-  //   setdefaultV({ ...defaultV, type: option });
-  //   console.table(defaultV.type)
-  // };
-  console.table(defaultV);
+  const divRef = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState<number>(0);
+  const [test, settest] = useState<boolean>(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (divRef.current) {
+        const newWidth = divRef.current.offsetWidth;
+        setWidth(newWidth);
+        if (newWidth as number < 140 ) {
+          settest(false)
+        }
+        else {
+          settest(true)
+        }
+        console.log(`Width changed to: ${newWidth}px`);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [divRef]);
+  
   const options: Option[] = [
     { label: "Apartment", value: "apartment" },
     { label: "Condo", value: "condo" },
@@ -177,7 +196,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="h-screen w-screen">
+      <section className="lg:h-screen h-full w-screen">
         <br />
         <h1 className="flex justify-center mx-auto mt-5 lg:text-7xl md:text-4xl text-[#0e012d] font-semibold">
           Special&nbsp;Homes
@@ -187,20 +206,144 @@ export default function Page() {
           things listing inckoding things want find anywhere else
         </div>
         <div
-          className=" grid grid-flow-row px-28 grid-cols-3 p-10 gap-16 w-screen h-3/4"
+          className=" grid grid-flow-row px-28 md:grid-cols-2 lg:grid-cols-3 p-10 gap-16 lg:gap-12 w-screen h-max"
           content=""
         >
-          <div className="h-full w-full bg-white rounded-xl shadow-2xl flex flex-col">
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            className="h-96 w-full bg-white rounded-xl shadow-2xl flex flex-col"
+          >
             <div className="w-full h-3/6 bg-yellow-400 rounded-t-xl"></div>
-            <button className="flex w-1/3 h-10 bg-red-400 mt-2 mr-5 mb-auto ml-auto rounded-2xl justify-center items-center text-white">
-              View detai
-            </button>
-            <button className="flex w-1/2 h-12 bg-blue-600 mt-auto ml-auto rounded-br-xl justify-center items-center text-white font-semibold">
-              View detai
-            </button>
-          </div>
-          <div className="h-full w-full bg-white rounded-xl shadow-2xl"></div>
-          <div className="h-full w-full bg-white rounded-xl shadow-2xl"></div>
+            <div className="w-full h-1/2 rounded-b-xl flex flex-col">
+              <div className="h-16 w-full flex flex-row">
+                <h1 className="w-2/3 h-10 text-2xl lg:text-3xl ml-5 mt-2 font-semibold text-zinc-700">
+                  $5,000,000 <br />
+                  <span className=" relative -top-5 text-xs lg:text-sm text-zinc-400 leading-relaxed font-normal">
+                    dgbsdgb sfgnsfgn gnbdqgbsd
+                  </span>
+                </h1>
+                <button className="flex w-1/3 h-10 bg-red-400 mt-2 mr-5 mb-auto ml-auto rounded-2xl justify-center items-center text-white">
+                  View detai
+                </button>
+              </div>
+              <div className=" grid grid-flow-row grid-cols-2 grid-rows-2 h-[calc(100%_-_64px)] w-full px-3 py-3">
+                <div
+                  ref={divRef}
+                  className="flex items-center px-2 h-7 w-[95%] text-zinc-400"
+                >
+                  <span className="text-black text-xl mr-2">
+                    <ion-icon name="car-sport-sharp"></ion-icon>
+                  </span>
+                  2{test && <span>&nbsp;grage&nbsp;spice</span>}
+                </div>
+                <div className="h-7 w-[95%] text-zinc-400 flex flex-row">
+                  <span className="text-black text-xl mr-2">
+                    <ion-icon name="bed-sharp"></ion-icon>
+                  </span>
+                  3{test && <span>&nbsp;badroom&nbsp;chamber</span>}
+                </div>
+                <div className="h-7 w-[95%] text-zinc-400 flex flex-row">
+                  <span className="text-black text-xl mr-2">
+                    <ion-icon name="bed-sharp"></ion-icon>
+                  </span>
+                  3{test && <span>&nbsp;badroom&nbsp;chamber</span>}
+                </div>
+              </div>
+              <button className="flex w-1/2 h-12 bg-blue-600 mt-auto rounded-br-xl ml-auto justify-center items-center text-white font-semibold">
+                View detai
+              </button>
+            </div>
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            className="h-96 w-full bg-white rounded-xl shadow-2xl flex flex-col"
+          >
+            <div className="w-full h-3/6 bg-yellow-400 rounded-t-xl"></div>
+            <div className="w-full h-1/2 rounded-b-xl flex flex-col">
+              <div className="h-16 w-full flex flex-row">
+                <h1 className="w-2/3 h-10 text-2xl lg:text-3xl ml-5 mt-2 font-semibold text-zinc-700">
+                  $5,000,000 <br />
+                  <span className=" relative -top-5 text-xs lg:text-sm text-zinc-400 leading-relaxed font-normal">
+                    dgbsdgb sfgnsfgn gnbdqgbsd
+                  </span>
+                </h1>
+                <button className="flex w-1/3 h-10 bg-red-400 mt-2 mr-5 mb-auto ml-auto rounded-2xl justify-center items-center text-white">
+                  View detai
+                </button>
+              </div>
+              <div className=" grid grid-flow-row grid-cols-2 grid-rows-2 h-[calc(100%_-_64px)] w-full px-3 py-3">
+                <div
+                  ref={divRef}
+                  className="flex items-center px-2 h-7 w-[95%] text-zinc-400"
+                >
+                  <span className="text-black text-xl mr-2">
+                    <ion-icon name="car-sport-sharp"></ion-icon>
+                  </span>
+                  2{test && <span>&nbsp;grage&nbsp;spice</span>}
+                </div>
+                <div className="h-7 w-[95%] text-zinc-400 flex flex-row">
+                  <span className="text-black text-xl mr-2">
+                    <ion-icon name="bed-sharp"></ion-icon>
+                  </span>
+                  3{test && <span>&nbsp;badroom&nbsp;chamber</span>}
+                </div>
+                <div className="h-7 w-[95%] text-zinc-400 flex flex-row">
+                  <span className="text-black text-xl mr-2">
+                    <ion-icon name="bed-sharp"></ion-icon>
+                  </span>
+                  3{test && <span>&nbsp;badroom&nbsp;chamber</span>}
+                </div>
+              </div>
+              <button className="flex w-1/2 h-12 bg-blue-600 mt-auto rounded-br-xl ml-auto justify-center items-center text-white font-semibold">
+                View detai
+              </button>
+            </div>
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            className="h-96 w-full bg-white rounded-xl shadow-2xl flex flex-col"
+          >
+            <div className="w-full h-3/6 bg-yellow-400 rounded-t-xl"></div>
+            <div className="w-full h-1/2 rounded-b-xl flex flex-col">
+              <div className="h-16 w-full flex flex-row">
+                <h1 className="w-2/3 h-10 text-2xl lg:text-3xl ml-5 mt-2 font-semibold text-zinc-700">
+                  $5,000,000 <br />
+                  <span className=" relative -top-5 text-xs lg:text-sm text-zinc-400 leading-relaxed font-normal">
+                    dgbsdgb sfgnsfgn gnbdqgbsd
+                  </span>
+                </h1>
+                <button className="flex w-1/3 h-10 bg-red-400 mt-2 mr-5 mb-auto ml-auto rounded-2xl justify-center items-center text-white">
+                  View detai
+                </button>
+              </div>
+              <div className=" grid grid-flow-row grid-cols-2 grid-rows-2 h-[calc(100%_-_64px)] w-full px-3 py-3">
+                <div
+                  ref={divRef}
+                  className="flex items-center px-2 h-7 w-[95%] text-zinc-400"
+                >
+                  <span className="text-black text-xl mr-2">
+                    <ion-icon name="car-sport-sharp"></ion-icon>
+                  </span>
+                  2{test && <span>&nbsp;grage&nbsp;spice</span>}
+                </div>
+                <div className="h-7 w-[95%] text-zinc-400 flex flex-row">
+                  <span className="text-black text-xl mr-2">
+                    <ion-icon name="bed-sharp"></ion-icon>
+                  </span>
+                  3{test && <span>&nbsp;badroom&nbsp;chamber</span>}
+                </div>
+                <div className="h-7 w-[95%] text-zinc-400 flex flex-row">
+                  <span className="text-black text-xl mr-2">
+                    <ion-icon name="bed-sharp"></ion-icon>
+                  </span>
+                  3{test && <span>&nbsp;badroom&nbsp;chamber</span>}
+                </div>
+              </div>
+              <button className="flex w-1/2 h-12 bg-blue-600 mt-auto rounded-br-xl ml-auto justify-center items-center text-white font-semibold">
+                View detai
+              </button>
+            </div>
+          </motion.div>
         </div>
       </section>
     </>
