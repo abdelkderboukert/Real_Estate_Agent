@@ -25,30 +25,34 @@ export default function Header() {
         </span>
       </div>
       <div className="h-full w-full items-center justify-center flex flex-row">
-        {["Home", "Explore", "Service", "Contacte", "Blog"].map(
-          (label, index) => (
-            <motion.div
-              key={index}
-              className="text-black mx-2 flex md:mx-4 lg:mx-7 cursor-pointer font-semibold"
-              whileHover={{ scale: 1.1 }}
-              onMouseEnter={() => handleHover(index, true)}
-              onMouseLeave={() => handleHover(index, false)}
-            >
-              <Link href="./#gg">{label}</Link>
-              {isHovered[index] && (
-                <motion.span
-                  className="line flex absolute bottom-0 left-0 w-full h-1 bg-black rounded-2xl"
-                  variants={{
-                    hover: { width: "100%" },
-                    rest: { width: 0 },
-                  }}
-                  animate="hover"
-                  initial="rest"
-                />
-              )}
-            </motion.div>
-          )
-        )}
+        {[
+          { name: "Home", url: "#home" },
+          { name: "Explore", url: "#us" },
+          { name: "Service", url: "#service" },
+          { name: "Contacte", url: "#contact" },
+          { name: "Blog", url: "#blog" },
+        ].map((label, index) => (
+          <motion.div
+            key={index}
+            className="text-black mx-2 flex md:mx-4 lg:mx-7 cursor-pointer font-semibold"
+            whileHover={{ scale: 1.1 }}
+            onMouseEnter={() => handleHover(index, true)}
+            onMouseLeave={() => handleHover(index, false)}
+          >
+            <Link href={`./${label.url}`}>{label.name}</Link>
+            {isHovered[index] && (
+              <motion.span
+                className="line flex absolute bottom-0 left-0 w-full h-1 bg-black rounded-2xl"
+                variants={{
+                  hover: { width: "100%" },
+                  rest: { width: 0 },
+                }}
+                animate="hover"
+                initial="rest"
+              />
+            )}
+          </motion.div>
+        ))}
       </div>
       <div className="h-full flex w-72 justify-center items-center flex-row">
         <motion.div
