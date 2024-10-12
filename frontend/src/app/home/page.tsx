@@ -9,6 +9,7 @@ import Fonted from "../_auti/fonted";
 export default function Page() {
   interface DefaultV {
     type: string;
+    localoitation: string;
     min: number;
     max: number;
   }
@@ -22,15 +23,26 @@ export default function Page() {
     max: 500,
     min: 300,
     type: "",
+    localoitation: "",
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setdefaultV({ ...defaultV, [event.target.name]: event.target.value });
+    const newValue = parseFloat(event.target.value) * 1000;
+    setdefaultV({ ...defaultV, [event.target.name]: newValue });
   };
 
   const handleChange1 = (event: React.ChangeEvent<HTMLSelectElement>) => {
     console.log("handleChange1 called with:", event.target.value);
-    setdefaultV({ ...defaultV, type: event.target.value as string });
+    setdefaultV({
+      ...defaultV,
+      [event.target.name]: event.target.value as string,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(defaultV);
+    // Do something with the form data, such as sending it to a server
   };
 
   const divRef = useRef<HTMLDivElement>(null);
@@ -47,7 +59,6 @@ export default function Page() {
         } else {
           settest(true);
         }
-        console.log(`Width changed to: ${newWidth}px`);
       }
     };
     window.addEventListener("resize", handleResize);
@@ -90,15 +101,27 @@ export default function Page() {
             </Link>
           </div>
         </div>
-        <div className="w-2/3 bg-white shadow-2xl rounded-2xl px-5 py-2 h-24 relative -top-12 justify-between items-center flex flex-row">
+        <form
+          onSubmit={handleSubmit}
+          className="w-2/3 bg-white shadow-2xl rounded-2xl px-5 py-2 h-24 relative -top-12 justify-between items-center flex flex-row"
+        >
           <div className="w-1/4 h-full px-5">
             <span className="text-zinc-700 font-medium text-lg">
               Localisation
             </span>{" "}
             <br />
-            <div className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 w-3/4 rounded-lg">
-              New Yourk
-            </div>
+            <select
+              className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 w-3/4 rounded-lg"
+              name="localoitation"
+              value={defaultV.type}
+              onChange={handleChange1}
+            >
+              {options.map((option, index) => (
+                <option key={index} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="w-1/4 h-full px-5">
             <span className="text-zinc-700 font-medium text-lg">Type</span>{" "}
@@ -124,13 +147,15 @@ export default function Page() {
             <div className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 w-3/4 rounded-lg">
               <input
                 type="text"
+                name="min"
                 defaultValue={defaultV.min}
                 onChange={handleChange}
-                className=" border-none bg-zinc-200 w-7 max-w-min"
+                className=" border-none bg-zinc-200 w-7 max-w-min focus:outline-none"
               />
               k&nbsp;-&nbsp;
               <input
                 type="text"
+                name="max"
                 defaultValue={defaultV.max}
                 onChange={handleChange}
                 className=" border-none bg-zinc-200 w-7 max-w-min focus:outline-none"
@@ -139,15 +164,16 @@ export default function Page() {
             </div>
           </div>
           <div className="w-1/4 h-full justify-end items-center flex">
-            <motion.div
+            <motion.button
+              type="submit"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.75 }}
               className="text-white text-md  cursor-pointer select-none  bg-[#0e012d] h-12 w-2/3 min-w-24 rounded-xl shadow-md shadow-[#454545] justify-center items-center flex"
             >
               Search
-            </motion.div>
+            </motion.button>
           </div>
-        </div>
+        </form>
       </div>
 
       <section
@@ -487,7 +513,7 @@ export default function Page() {
         className="lg:h-screen w-screen grid grid-flow-row px-28 grid-cols-1 lg:grid-cols-2 p-10 gap-16 lg:gap-12"
         id="us"
       >
-        <div className=" relative h-full w-full bg-white rounded-3xl shadow-2xl bg-p4">
+        <div className=" relative h-full w-full bg-white rounded-3xl shadow-2xl bg-p4 ">
           <motion.div
             whileHover={{
               width: "100%",

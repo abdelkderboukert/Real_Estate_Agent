@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Contentt from "./Content"
 import Link from "next/link";
 
 export default function Header() {
@@ -54,7 +55,7 @@ export default function Header() {
           </motion.div>
         ))}
       </div>
-      <div className="h-full flex w-72 justify-center items-center flex-row">
+      {/* <div className="h-full flex w-72 justify-center items-center flex-row">
         <motion.div
           whileHover={{ backgroundColor: "#e6e5db" }}
           className="h-10 w-24 select-none cursor-pointer rounded-xl justify-center items-center flex text-black mr-1"
@@ -67,7 +68,8 @@ export default function Header() {
         >
           Sing up
         </motion.div>
-      </div>
+      </div> */}
+      <Contentt/>
     </div>
   );
 }
