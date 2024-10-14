@@ -20,7 +20,7 @@
 
 @font-face {
   font-family: Protest Strike ;
-  src: url(./fonts/ProtestStrike-Regular.ttf);
+  src: url(../../public/fonts/ProtestStrike-Regular.ttf);
 }
 
 .protest-strike-regular {
@@ -47,7 +47,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("./home/home.jpg"); 
+  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("../../public/images/home.jpg"); 
   /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%); */
 }
 
@@ -56,7 +56,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("./home/p2.jpg"); 
+  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("../../public/images/p2.jpg"); 
   /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%); */
 }
 
@@ -65,7 +65,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("./home/p3.jpg"); 
+  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("../../public/images/p3.jpg"); 
   /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%); */
 }
 
@@ -74,7 +74,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("./home/p4.jpg"); 
+  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("../../public/images/p4.jpg"); 
   /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%); */
 }
 
@@ -83,7 +83,16 @@ body {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("./home/p5.jpg"); 
+  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("../../public/images/p5.jpg"); 
+  /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%); */
+}
+
+.bg-p6 {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  background-image:  /*linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%) ,*/ url("../../public/images/google.png"); 
   /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%); */
 }
 
