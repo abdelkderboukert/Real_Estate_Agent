@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IonIcon } from '@ionic/react';
 import { closeOutline } from 'ionicons/icons';
+import { login, signup, fetchData } from "./auth";
 
 
 export default function Contentt() {
@@ -50,7 +51,7 @@ interface ContentProps {
   onButtonClick: (value: boolean) => void;
 }
 
-const Content = ({ index, onButtonClick }: ContentProps) => {
+const Content = ({ onButtonClick }: ContentProps) => {
   interface User {
     email: string;
     password: string;
@@ -62,19 +63,26 @@ const Content = ({ index, onButtonClick }: ContentProps) => {
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("handleChange1 called with:", event.target.value);
     setUser({
       ...user,
       [event.target.name]: event.target.value as string,
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user);
+    console.log(user)
+    try {
+      const response = await login(user);
+      console.log(response);
+      // You can also store the token in local storage or a state management system
+      localStorage.setItem("token", response.token);
+    } catch (error) {
+      console.error(error);
+      // Display an error message to the user
+      alert("Invalid email or password");
+    }
   };
-
-  console.log(index);
   return (
     <motion.div
       layout

@@ -1,0 +1,18 @@
+POST http://127.0.0.1:8000/api/login
+Content-Type: application/json
+
+{"email": "abdelkaderboukart1@gmail.com", "password": "1a7o2u0t06"}
+
+###
+
+POST http://127.0.0.1:8000/api/signup
+Content-Type: application/json
+
+{ "username": "abdelkader", "password": "1a7o2u0t06", "email": "abdelkaderboukart1@gmail.com" }
+
+###
+
+GET http://127.0.0.1:8000/api/test_token
+Content-Type: application/json
+
+{ "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5MDAyMDg4LCJpYXQiOjE3MjkwMDE3ODgsImp0aSI6IjNjOTA5YzE0NGE3YjQ5NjNhMjA1ODkxZTM3ZTVmZTgwIiwidXNlcl9pZCI6MX0.rN0vPpg3Nu15ZP7YWBNX8UpiIe9_gU61t_gOtvj4iC0"}
