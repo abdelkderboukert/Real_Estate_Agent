@@ -1,23 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IonIcon } from '@ionic/react';
 import { closeOutline } from 'ionicons/icons';
-import { login, signup, fetchData } from "./auth";
+import { login, signup, fetchData, logout } from "./auth";
 
 
 export default function Contentt() {
 
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [isLogIn , setLogIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    const itemValue = localStorage.getItem("token");
+    if (itemValue !== null) {
+      setLogIn(true);
+    } else {
+      setLogIn(false);
+    }
+  }, []);
+
 
   const handleClick = (value: boolean) => {
     console.log(value)
     setIsClicked(value);
   };
 
+  const handlLogin = (value: boolean) => {
+    setLogIn(value);
+    try {
+      const itemValue = localStorage.getItem("token");
+      const response = logout(itemValue as string);
+      console.log(response); 
+    } catch {
+    }
+  };
+
   return (
-    <div
-      className=" flex w-72 justify-center items-center flex-row h-max"
-    >
+    <div className=" flex w-72 justify-center items-center flex-row h-max">
       <motion.div
         onClick={() => handleClick(true)}
         whileHover={{ backgroundColor: "#e6e5db" }}
@@ -26,20 +45,20 @@ export default function Contentt() {
         Sing in
       </motion.div>
       <motion.div
-        onClick={() => handleClick(true)}
+        onClick={() =>  isLogIn? handlLogin(false) : handleClick(true) }
         className="bg-red-500 cursor-pointer select-none h-10 w-24 rounded-xl justify-center items-center flex shadow-md shadow-[#454545]"
         whileHover={{ backgroundColor: "black" }}
       >
-        Sing up
+        {isLogIn ? <span>Log Out</span> : <span>Sing up</span>}
       </motion.div>
       <AnimatePresence>
         {isClicked && (
-          <Content index={2} onButtonClick={handleClick} />
+          <Content onButtonClick={handleClick} onLogIn={handlLogin} />
         )}
       </AnimatePresence>
       <AnimatePresence>
         {isClicked && (
-          <Content index={1} onButtonClick={handleClick} />
+          <Content onButtonClick={handleClick} onLogIn={handlLogin} />
         )}
       </AnimatePresence>
     </div>
@@ -47,11 +66,11 @@ export default function Contentt() {
 }
 
 interface ContentProps {
-  index: number;
   onButtonClick: (value: boolean) => void;
+  onLogIn: (value: boolean) => void;
 }
 
-const Content = ({ onButtonClick }: ContentProps) => {
+const Content = ({ onButtonClick, onLogIn }: ContentProps) => {
   interface User {
     email: string;
     password: string;
@@ -71,17 +90,23 @@ const Content = ({ onButtonClick }: ContentProps) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user)
+    console.log(user);
     try {
       const response = await login(user);
       console.log(response);
       // You can also store the token in local storage or a state management system
       localStorage.setItem("token", response.token);
+      onButtonClick(false);
+      onLogIn(true);
     } catch (error) {
       console.error(error);
       // Display an error message to the user
       alert("Invalid email or password");
     }
+    setUser({
+      email: "",
+      password: "",
+    });
   };
   return (
     <motion.div
@@ -137,7 +162,7 @@ const Content = ({ onButtonClick }: ContentProps) => {
           <input
             type="email"
             name="email"
-            id=""
+            value={user.email}
             className="h-10 w-full bg-gray-50 rounded-lg p-2 placeholder:text-zinc-200 placeholder:text"
             placeholder="Your work email"
             onChange={handleChange}
@@ -149,7 +174,7 @@ const Content = ({ onButtonClick }: ContentProps) => {
           <input
             type="password"
             name="password"
-            id=""
+            value={user.password}
             className="h-10 w-full bg-gray-50 rounded-lg p-2 placeholder:text-zinc-200 placeholder:text"
             placeholder="Paste sing up code"
             onChange={handleChange}

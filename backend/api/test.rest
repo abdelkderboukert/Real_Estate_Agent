@@ -15,4 +15,10 @@ Content-Type: application/json
 GET http://127.0.0.1:8000/api/test_token
 Content-Type: application/json
 
-{ "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5MDAyMDg4LCJpYXQiOjE3MjkwMDE3ODgsImp0aSI6IjNjOTA5YzE0NGE3YjQ5NjNhMjA1ODkxZTM3ZTVmZTgwIiwidXNlcl9pZCI6MX0.rN0vPpg3Nu15ZP7YWBNX8UpiIe9_gU61t_gOtvj4iC0"}
+{ "token" : "c3bd3cc2542af3df2765f3542224d67b108a9b82"}
+
+###
+
+POST http://127.0.0.1:8000/api/logout
+Authorization: Token c3bd3cc2542af3df2765f3542224d67b108a9b82
+Content-Type: application/json

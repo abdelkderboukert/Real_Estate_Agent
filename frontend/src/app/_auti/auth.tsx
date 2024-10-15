@@ -62,6 +62,37 @@ const signup = async (data: SignupData): Promise<TokenResponse> => {
   }
 };
 
+const logout = async (token: string): Promise<void> => {
+  try {
+    const response = await axios.post(
+      `${apiUrl}/logout`,
+      {},
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    if (response.status === 200) {
+      // Clear local storage or cookies that store the token
+      localStorage.removeItem("token");
+      // Redirect to login page or show a success message
+      swal.fire({
+        title: "Logged out successfully!",
+        icon: "success",
+        toast: true,
+        timer: 6000,
+        position: "top-right",
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 const fetchData = async (token: string): Promise<any> => {
   try {
     const response = await axios.get(`${apiUrl}/test-token`, {
@@ -90,4 +121,4 @@ const postData = async (data: any, token: string): Promise<any> => {
   }
 };
 
-export { login, signup, fetchData, postData };
+export { login, signup, fetchData, postData, logout };

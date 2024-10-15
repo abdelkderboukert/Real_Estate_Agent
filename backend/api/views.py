@@ -36,3 +36,10 @@ def login(request):
 @permission_classes([IsAuthenticated])
 def test_token(request):
     return Response("passed!")
+
+@api_view(['POST'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def logout(request):
+    request.user.auth_token.delete()
+    return Response("Logged out successfully!", status=status.HTTP_200_OK)
