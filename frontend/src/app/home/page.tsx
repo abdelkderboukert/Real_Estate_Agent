@@ -3,6 +3,8 @@ import React from "react";
 import Header from "../_auti/header";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import { IonIcon } from "@ionic/react";
+import { checkmarkSharp, carSportSharp, bedSharp } from "ionicons/icons";
 import { motion } from "framer-motion";
 import Fonted from "../_auti/fonted";
 
@@ -203,21 +205,24 @@ export default function Page() {
           >
             <span className="flex flex-row">
               <div className=" flex justify-center items-center h-7 w-7 rounded-full bg-black mr-2 text-white font-bold">
-                <ion-icon name="checkmark-sharp"></ion-icon>
+                {/* <ion-icon name="checkmark-sharp"></ion-icon> */}
+                <IonIcon icon={checkmarkSharp} />
               </div>
               678k buys have worked with us
             </span>
             <br />
             <span className="flex flex-row">
               <div className=" flex justify-center items-center h-7 w-7 rounded-full bg-red-400 mr-2 text-white font-bold">
-                <ion-icon name="checkmark-sharp"></ion-icon>
+                {/* <ion-icon name="checkmark-sharp"></ion-icon> */}
+                <IonIcon icon={checkmarkSharp} />
               </div>
               Professional and expaircced rosources
             </span>
             <br />
             <span className="flex flex-row">
               <div className=" flex justify-center items-center h-7 w-7 rounded-full bg-blue-700 mr-2 text-white font-bold">
-                <ion-icon name="checkmark-sharp"></ion-icon>
+                {/* <ion-icon name="checkmark-sharp"></ion-icon> */}
+                <IonIcon icon={checkmarkSharp} />
               </div>
               Provide the best service of users
             </span>
@@ -262,19 +267,20 @@ export default function Page() {
                   className="flex items-center px-2 h-7 w-[95%] text-zinc-400"
                 >
                   <span className="text-black text-xl mr-2">
-                    <ion-icon name="car-sport-sharp"></ion-icon>
+                    {/* <ion-icon name="car-sport-sharp"></ion-icon> */}
+                    <IonIcon icon={carSportSharp} />
                   </span>
                   2{test && <span>&nbsp;grage&nbsp;spice</span>}
                 </div>
                 <div className="h-7 w-[95%] text-zinc-400 flex flex-row">
                   <span className="text-black text-xl mr-2">
-                    <ion-icon name="bed-sharp"></ion-icon>
+                    <IonIcon icon={bedSharp} />
                   </span>
                   3{test && <span>&nbsp;badroom&nbsp;chamber</span>}
                 </div>
                 <div className="h-7 w-[95%] text-zinc-400 flex flex-row">
                   <span className="text-black text-xl mr-2">
-                    <ion-icon name="bed-sharp"></ion-icon>
+                    <IonIcon icon={bedSharp} />
                   </span>
                   3{test && <span>&nbsp;badroom&nbsp;chamber</span>}
                 </div>
@@ -307,19 +313,19 @@ export default function Page() {
                   className="flex items-center px-2 h-7 w-[95%] text-zinc-400"
                 >
                   <span className="text-black text-xl mr-2">
-                    <ion-icon name="car-sport-sharp"></ion-icon>
+                    <IonIcon icon={carSportSharp} />
                   </span>
                   2{test && <span>&nbsp;grage&nbsp;spice</span>}
                 </div>
                 <div className="h-7 w-[95%] text-zinc-400 flex flex-row">
                   <span className="text-black text-xl mr-2">
-                    <ion-icon name="bed-sharp"></ion-icon>
+                    <IonIcon icon={bedSharp} />
                   </span>
                   3{test && <span>&nbsp;badroom&nbsp;chamber</span>}
                 </div>
                 <div className="h-7 w-[95%] text-zinc-400 flex flex-row">
                   <span className="text-black text-xl mr-2">
-                    <ion-icon name="bed-sharp"></ion-icon>
+                    <IonIcon icon={bedSharp} />
                   </span>
                   3{test && <span>&nbsp;badroom&nbsp;chamber</span>}
                 </div>
@@ -352,19 +358,19 @@ export default function Page() {
                   className="flex items-center px-2 h-7 w-[95%] text-zinc-400"
                 >
                   <span className="text-black text-xl mr-2">
-                    <ion-icon name="car-sport-sharp"></ion-icon>
+                    <IonIcon icon={carSportSharp} />
                   </span>
                   2{test && <span>&nbsp;grage&nbsp;spice</span>}
                 </div>
                 <div className="h-7 w-[95%] text-zinc-400 flex flex-row">
                   <span className="text-black text-xl mr-2">
-                    <ion-icon name="bed-sharp"></ion-icon>
+                    <IonIcon icon={bedSharp} />
                   </span>
                   3{test && <span>&nbsp;badroom&nbsp;chamber</span>}
                 </div>
                 <div className="h-7 w-[95%] text-zinc-400 flex flex-row">
                   <span className="text-black text-xl mr-2">
-                    <ion-icon name="bed-sharp"></ion-icon>
+                    <IonIcon icon={bedSharp} />
                   </span>
                   3{test && <span>&nbsp;badroom&nbsp;chamber</span>}
                 </div>
@@ -555,3 +561,4 @@ export default function Page() {
     </>
   );
 }
+

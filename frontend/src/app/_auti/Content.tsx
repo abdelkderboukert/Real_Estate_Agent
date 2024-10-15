@@ -1,21 +1,13 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { IonIcon } from '@ionic/react';
+import { closeOutline } from 'ionicons/icons';
+
 
 export default function Contentt() {
-  
-  
-  const [isHovred, setIsHovred] = useState(true)
-  // const [isClicked, setIsClicked] = useState<boolean[]>(
-  //   new Array(5).fill(false)
-  // );
+
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
-  // const handleClick = (index: number, value: boolean) => {
-  //   setIsClicked((prevIsHovered) => {
-  //     prevIsHovered[index] = value;
-  //     return [...prevIsHovered];
-  //   });
-  // };
   const handleClick = (value: boolean) => {
     console.log(value)
     setIsClicked(value);
@@ -23,13 +15,9 @@ export default function Contentt() {
 
   return (
     <div
-      // onMouseEnter={() => setIsHovred(true)}
-      // onMouseLeave={() => setIsHovred(false)}
       className=" flex w-72 justify-center items-center flex-row h-max"
     >
       <motion.div
-        // onMouseEnter={() => handleClick(1, true)}
-        // onMouseLeave={() => handleClick(1, false)}
         onClick={() => handleClick(true)}
         whileHover={{ backgroundColor: "#e6e5db" }}
         className="h-10 w-24 select-none cursor-pointer rounded-xl justify-center items-center flex text-black mr-1"
@@ -37,8 +25,6 @@ export default function Contentt() {
         Sing in
       </motion.div>
       <motion.div
-        // onMouseEnter={() => handleClick(2, true)}
-        // onMouseLeave={() => handleClick(2, false)}
         onClick={() => handleClick(true)}
         className="bg-red-500 cursor-pointer select-none h-10 w-24 rounded-xl justify-center items-center flex shadow-md shadow-[#454545]"
         whileHover={{ backgroundColor: "black" }}
@@ -46,18 +32,12 @@ export default function Contentt() {
         Sing up
       </motion.div>
       <AnimatePresence>
-        {/* {isClicked[1] && isHovred && (
-          <Content index={2} />
-        )} */}
-        {isClicked && isHovred && (
+        {isClicked && (
           <Content index={2} onButtonClick={handleClick} />
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {/* {isClicked[2] && isHovred && (
-          <Content index={1} />
-        )} */}
-        {isClicked && isHovred && (
+        {isClicked && (
           <Content index={1} onButtonClick={handleClick} />
         )}
       </AnimatePresence>
@@ -81,7 +61,7 @@ const Content = ({ index, onButtonClick }: ContentProps) => {
     password: "",
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log("handleChange1 called with:", event.target.value);
     setUser({
       ...user,
@@ -92,7 +72,6 @@ const Content = ({ index, onButtonClick }: ContentProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(user);
-    // Do something with the form data, such as sending it to a server
   };
 
   console.log(index);
@@ -126,7 +105,7 @@ const Content = ({ index, onButtonClick }: ContentProps) => {
           className=" absolute h-10 w-10 text-4xl flex justify-center items-center text-black top-3 right-2 rounded-md hover:bg-zinc-50 "
           onClick={() => onButtonClick(false)}
         >
-          <ion-icon name="close-outline"></ion-icon>
+          <IonIcon icon={closeOutline} />
         </div>
         <h1 className="text-2xl text-[#0e012d]">Log in or sing up</h1>
         <h2 className="text-zinc-400">Get started for free</h2>
