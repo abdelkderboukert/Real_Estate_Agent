@@ -27,13 +27,14 @@ export default function Contentt() {
 
   const handlLogin = (value: boolean) => {
     setLogIn(value);
-    try {
-      const itemValue = localStorage.getItem("token");
-      const response = logout(itemValue as string);
-      console.log(response); 
-    } catch {
-    }
+    // const itemValue = localStorage.getItem("token");
+    // logout(itemValue as string);
   };
+
+  const Logout = () => {
+    const itemValue = localStorage.getItem("token");
+    logout(itemValue as string);
+  }
 
   return (
     <div className=" flex w-72 justify-center items-center flex-row h-max">
@@ -45,7 +46,7 @@ export default function Contentt() {
         Sing in
       </motion.div>
       <motion.div
-        onClick={() =>  isLogIn? handlLogin(false) : handleClick(true) }
+        onClick={() => (isLogIn ? Logout() : handleClick(true))}
         className="bg-red-500 cursor-pointer select-none h-10 w-24 rounded-xl justify-center items-center flex shadow-md shadow-[#454545]"
         whileHover={{ backgroundColor: "black" }}
       >
