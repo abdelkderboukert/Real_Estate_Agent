@@ -257,9 +257,14 @@ export default function Page() {
                     dgbsdgb sfgnsfgn gnbdqgbsd
                   </span>
                 </h1>
-                <button className="flex w-1/3 h-10 bg-red-400 mt-2 mr-5 mb-auto ml-auto rounded-2xl justify-center items-center text-white">
-                  View detai
-                </button>
+                <div className="flex w-1/3 h-10 bg-red-400 mt-2 mr-5 mb-auto ml-auto rounded-2xl justify-center items-center text-white">
+                  {/* <Link
+                    // href="/shope/[id]"
+                    // as={`/shope/${plant.category}/${plant.id}`}
+                  > */}
+                    View detai
+                  {/* </Link> */}
+                </div>
               </div>
               <div className=" grid grid-flow-row grid-cols-2 grid-rows-2 h-[calc(100%_-_64px)] w-full px-3 py-3">
                 <div
@@ -303,9 +308,14 @@ export default function Page() {
                     dgbsdgb sfgnsfgn gnbdqgbsd
                   </span>
                 </h1>
-                <button className="flex w-1/3 h-10 bg-red-400 mt-2 mr-5 mb-auto ml-auto rounded-2xl justify-center items-center text-white">
-                  View detai
-                </button>
+                <div className="flex w-1/3 h-10 bg-red-400 mt-2 mr-5 mb-auto ml-auto rounded-2xl justify-center items-center text-white">
+                  {/* <Link
+                    href="/shope/[id]"
+                    // as={`/shope/${plant.category}/${plant.id}`}
+                  > */}
+                    View detai
+                  {/* </Link> */}
+                </div>
               </div>
               <div className=" grid grid-flow-row grid-cols-2 grid-rows-2 h-[calc(100%_-_64px)] w-full px-3 py-3">
                 <div
@@ -348,9 +358,14 @@ export default function Page() {
                     dgbsdgb sfgnsfgn gnbdqgbsd
                   </span>
                 </h1>
-                <button className="flex w-1/3 h-10 bg-red-400 mt-2 mr-5 mb-auto ml-auto rounded-2xl justify-center items-center text-white">
-                  View detai
-                </button>
+                <div className="flex w-1/3 h-10 bg-red-400 mt-2 mr-5 mb-auto ml-auto rounded-2xl justify-center items-center text-white">
+                  {/* <Link
+                    href="/shope/[id]"
+                    // as={`/shope/${plant.category}/${plant.id}`}
+                  > */}
+                    View detai
+                  {/* </Link> */}
+                </div>
               </div>
               <div className=" grid grid-flow-row grid-cols-2 grid-rows-2 h-[calc(100%_-_64px)] w-full px-3 py-3">
                 <div

@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { IonIcon } from '@ionic/react';
 import { closeOutline } from 'ionicons/icons';
 import { login, signup, fetchData, logout } from "./auth";
+import { GoogleLogin } from "react-google-login";
+
 
 
 export default function Contentt() {
@@ -19,7 +21,6 @@ export default function Contentt() {
     }
   }, []);
 
-
   const handleClick = (value: boolean) => {
     console.log(value)
     setIsClicked(value);
@@ -27,8 +28,6 @@ export default function Contentt() {
 
   const handlLogin = (value: boolean) => {
     setLogIn(value);
-    // const itemValue = localStorage.getItem("token");
-    // logout(itemValue as string);
   };
 
   const Logout = () => {
