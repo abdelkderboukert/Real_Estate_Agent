@@ -10,4 +10,5 @@ urlpatterns = [
     re_path('signup', signup),
     re_path('test_token', test_token),
     path('logout', logout, name='logout'),
+    path('predict/', predict_view, name='predict'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

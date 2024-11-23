@@ -69,6 +69,29 @@ export default function Page() {
     };
   }, [divRef]);
 
+  const [surfaceArea, setSurfaceArea] = useState("");
+  const [predictedPrice, setPredictedPrice] = useState(null);
+  const [error, setError] = useState(null);
+
+  const handleSubmit1 = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setError(null);
+    setPredictedPrice(null);
+
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/predict/?surface_area=${surfaceArea}`
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setPredictedPrice(data.predicted_price);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   const options: Option[] = [
     { label: "Apartment", value: "apartment" },
     { label: "Condo", value: "condo" },
@@ -262,7 +285,7 @@ export default function Page() {
                     // href="/shope/[id]"
                     // as={`/shope/${plant.category}/${plant.id}`}
                   > */}
-                    View detai
+                  View detai
                   {/* </Link> */}
                 </div>
               </div>
@@ -313,7 +336,7 @@ export default function Page() {
                     href="/shope/[id]"
                     // as={`/shope/${plant.category}/${plant.id}`}
                   > */}
-                    View detai
+                  View detai
                   {/* </Link> */}
                 </div>
               </div>
@@ -363,7 +386,7 @@ export default function Page() {
                     href="/shope/[id]"
                     // as={`/shope/${plant.category}/${plant.id}`}
                   > */}
-                    View detai
+                  View detai
                   {/* </Link> */}
                 </div>
               </div>
@@ -572,8 +595,57 @@ export default function Page() {
           </motion.div>
         </div>
       </section>
+
+      <section className=" h-svh w-screen">
+        <br />
+        <h1 className="flex justify-center mx-auto mt-5 lg:text-7xl md:text-4xl text-[#0e012d] font-semibold">
+          Price&nbsp;Prediction
+        </h1>
+        <div className="flex w-full h-max mt-5 justify-center items-center mx-auto select-none text-zinc-400 text-center text-xl">
+          We give you an approximate price for the hous based on the area <br />{" "}
+          this is done by comparing the area with Millions of houses in our
+          database
+        </div>
+        <form
+          onSubmit={handleSubmit1}
+          className="w-2/3 bg-white shadow-2xl rounded-2xl px-5 py-2 h-24 justify-between items-center flex mx-auto mt-20 flex-row"
+        >
+          <div className="w-1/4 h-full px-5">
+            <span className="text-zinc-700 font-medium text-lg">
+              Surface&nbsp;Area&nbsp;(m²):
+            </span>{" "}
+            <br />
+            <input
+              type="number"
+              className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 w-3/4 rounded-lg focus:outline-none"
+              value={surfaceArea}
+              onChange={(e) => setSurfaceArea(e.target.value)}
+              required
+            />
+          </div>
+          <div className="w-1/4 h-full px-5">
+            <span className="text-zinc-700 font-medium text-lg mt-5">
+              The&nbsp;prce
+            </span>{" "}
+            <br />
+            <div className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 rounded-lg">
+              {predictedPrice && <h2>{predictedPrice}</h2>}
+              {error && <h2 style={{ color: "red" }}>Error: {error}</h2>}
+            </div>
+          </div>
+          <div className="w-1/4 h-full justify-end items-center flex">
+            <motion.button
+              type="submit"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.75 }}
+              className="text-white text-md  cursor-pointer select-none  bg-[#0e012d] h-12 w-3/4 min-w-24 rounded-xl shadow-md shadow-[#454545] justify-center items-center flex"
+            >
+              Search
+            </motion.button>
+          </div>
+        </form>
+      </section>
       <Fonted />
     </>
   );
 }
-

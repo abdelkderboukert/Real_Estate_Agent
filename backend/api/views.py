@@ -12,7 +12,8 @@ from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from .serializers import *
 
-from .serializers import UserSerializerimport numpy as np
+from .serializers import UserSerializer
+import numpy as np
 
 
 # Load the Excel file and prepare the model
@@ -50,7 +51,8 @@ def predict_view(request):
         try:
             surface_area = float(surface_area)
             predicted_price1 = predict_price(surface_area)
-            return JsonResponse({'predicted_price': predicted_price1})
+            formatted_price = "{:.2f}".format(predicted_price1)
+            return JsonResponse({'predicted_price': formatted_price})
         except ValueError:
             return JsonResponse({'error': 'Invalid surface area. Please enter a valid number.'}, status=400)
     else:
