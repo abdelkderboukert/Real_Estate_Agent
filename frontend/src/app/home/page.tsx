@@ -71,7 +71,7 @@ export default function Page() {
 
   const [surfaceArea, setSurfaceArea] = useState("");
   const [predictedPrice, setPredictedPrice] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit1 = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -625,7 +625,7 @@ export default function Page() {
           </div>
           <div className="w-1/4 h-full px-5">
             <span className="text-zinc-700 font-medium text-lg mt-5">
-              The&nbsp;prce
+              The&nbsp;prce&nbsp;(DZD)
             </span>{" "}
             <br />
             <div className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 rounded-lg">

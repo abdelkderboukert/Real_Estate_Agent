@@ -150,7 +150,7 @@ SIMPLE_JWT = {
 # AUTH_USER_MODEL = 'api.User'
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3001',
+    'http://localhost:3000',
 ]
 
 CORS_ALLOW_METHODS = [
