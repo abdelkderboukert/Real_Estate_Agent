@@ -41,15 +41,23 @@ export default function Page() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     console.log(defaultV);
     // Do something with the form data, such as sending it to a server
+  };
+
+  const [click1, setclick] = useState<boolean>(false);
+  console.log(click1);
+
+  const handleClick = () => {
+    setclick(true);
   };
 
   const divRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState<number>(0);
   const [test, settest] = useState<boolean>(true);
+  console.log(width);
 
   useEffect(() => {
     const handleResize = () => {
@@ -73,7 +81,7 @@ export default function Page() {
   const [predictedPrice, setPredictedPrice] = useState(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit1 = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit1 = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
     setPredictedPrice(null);
@@ -88,7 +96,11 @@ export default function Page() {
       const data = await response.json();
       setPredictedPrice(data.predicted_price);
     } catch (err) {
-      setError(err.message);
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     }
   };
 
@@ -606,7 +618,7 @@ export default function Page() {
           this is done by comparing the area with Millions of houses in our
           database
         </div>
-        <form
+        {/* <form
           onSubmit={handleSubmit1}
           className="w-2/3 bg-white shadow-2xl rounded-2xl px-5 py-2 h-24 justify-between items-center flex mx-auto mt-20 flex-row"
         >
@@ -625,7 +637,7 @@ export default function Page() {
           </div>
           <div className="w-1/4 h-full px-5">
             <span className="text-zinc-700 font-medium text-lg mt-5">
-              The&nbsp;prce&nbsp;(DZD)
+              The&nbsp;prce&nbsp;(DZD):
             </span>{" "}
             <br />
             <div className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 rounded-lg">
@@ -643,7 +655,68 @@ export default function Page() {
               Search
             </motion.button>
           </div>
-        </form>
+        </form> */}
+        {/* <div className="w-full h-full justify-end items-center flex bg-black"> */}
+          {click1 ? (
+            <motion.form
+              animate={
+                click1
+                  ? { height: 96, width: "66.666666%" }
+                  : { scale: 1, rotate: 0 }
+              }
+              onSubmit={handleSubmit1}
+              className="w-2 bg-white shadow-2xl rounded-2xl px-5 py-2 h-2 justify-between items-center flex mx-auto my-20 flex-row mb-20"
+            >
+              <div className="w-1/4 h-full px-5">
+                <span className="text-zinc-700 font-medium text-lg">
+                  Surface&nbsp;Area&nbsp;(m²):
+                </span>{" "}
+                <br />
+                <input
+                  type="number"
+                  className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 w-3/4 rounded-lg focus:outline-none"
+                  value={surfaceArea}
+                  onChange={(e) => setSurfaceArea(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="w-1/4 h-full px-5">
+                <span className="text-zinc-700 font-medium text-lg mt-5">
+                  The&nbsp;prce&nbsp;(DZD):
+                </span>{" "}
+                <br />
+                <div className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 rounded-lg">
+                  {predictedPrice && <h2>{predictedPrice}</h2>}
+                  {error && <h2 style={{ color: "red" }}>Error: {error}</h2>}
+                </div>
+              </div>
+              <div className="w-1/4 h-full justify-end items-center flex">
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.75 }}
+                  className="text-white text-md  cursor-pointer select-none  bg-[#0e012d] h-12 w-3/4 min-w-24 rounded-xl shadow-md shadow-[#454545] justify-center items-center flex"
+                >
+                  Search
+                </motion.button>
+              </div>
+            </motion.form>
+          ) : (
+            <motion.button
+              type="submit"
+              className="text-white text-md my-20  cursor-pointer mx-auto select-none  bg-[#0e012d] h-12 w-48 min-w-24 rounded-2xl shadow-md shadow-[#454545] justify-center items-center flex"
+              animate={
+                click1
+                  ? { height: 96, width: "66.66666%", color: "tr" }
+                  : { scale: 1, rotate: 0 }
+              }
+              whileTap={{ scale: 0.75 }}
+              onClick={handleClick}
+            >
+              search
+            </motion.button>
+          )}
+        {/* </div> */}
       </section>
       <Fonted />
     </>

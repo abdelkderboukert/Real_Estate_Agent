@@ -26,8 +26,8 @@ list_x = df.iloc[:, 0].tolist()  # Input values
 list_y = df.iloc[:, 1].tolist()  # Output values
 
 # Convert lists to numpy arrays
-x = np.array(list_x).reshape(-1, 1)
-y = np.array(list_y)
+x = np.array(list_y).reshape(-1, 1)
+y = np.array(list_x)
 
 # Normalize x
 x_mean = np.mean(x)
