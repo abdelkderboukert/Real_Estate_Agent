@@ -618,45 +618,6 @@ export default function Page() {
           this is done by comparing the area with Millions of houses in our
           database
         </div>
-        {/* <form
-          onSubmit={handleSubmit1}
-          className="w-2/3 bg-white shadow-2xl rounded-2xl px-5 py-2 h-24 justify-between items-center flex mx-auto mt-20 flex-row"
-        >
-          <div className="w-1/4 h-full px-5">
-            <span className="text-zinc-700 font-medium text-lg">
-              Surface&nbsp;Area&nbsp;(m²):
-            </span>{" "}
-            <br />
-            <input
-              type="number"
-              className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 w-3/4 rounded-lg focus:outline-none"
-              value={surfaceArea}
-              onChange={(e) => setSurfaceArea(e.target.value)}
-              required
-            />
-          </div>
-          <div className="w-1/4 h-full px-5">
-            <span className="text-zinc-700 font-medium text-lg mt-5">
-              The&nbsp;prce&nbsp;(DZD):
-            </span>{" "}
-            <br />
-            <div className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 rounded-lg">
-              {predictedPrice && <h2>{predictedPrice}</h2>}
-              {error && <h2 style={{ color: "red" }}>Error: {error}</h2>}
-            </div>
-          </div>
-          <div className="w-1/4 h-full justify-end items-center flex">
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.75 }}
-              className="text-white text-md  cursor-pointer select-none  bg-[#0e012d] h-12 w-3/4 min-w-24 rounded-xl shadow-md shadow-[#454545] justify-center items-center flex"
-            >
-              Search
-            </motion.button>
-          </div>
-        </form> */}
-        {/* <div className="w-full h-full justify-end items-center flex bg-black"> */}
           {click1 ? (
             <motion.form
               animate={
@@ -704,7 +665,7 @@ export default function Page() {
           ) : (
             <motion.button
               type="submit"
-              className="text-white text-md my-20  cursor-pointer mx-auto select-none  bg-[#0e012d] h-12 w-48 min-w-24 rounded-2xl shadow-md shadow-[#454545] justify-center items-center flex"
+              className="text-white text-md my-20 cursor-pointer mx-auto select-none  bg-[#0e012d] h-12 w-48 min-w-24 rounded-2xl shadow-md shadow-[#454545] justify-center items-center flex"
               animate={
                 click1
                   ? { height: 96, width: "66.66666%", color: "tr" }

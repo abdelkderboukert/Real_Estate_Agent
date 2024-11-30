@@ -32,6 +32,7 @@ export default function Header() {
           { name: "Service", url: "#service" },
           { name: "Contacte", url: "#contact" },
           { name: "Blog", url: "#blog" },
+          { name: "Shope", url: "shope" },
         ].map((label, index) => (
           <motion.div
             key={index}
@@ -55,20 +56,6 @@ export default function Header() {
           </motion.div>
         ))}
       </div>
-      {/* <div className="h-full flex w-72 justify-center items-center flex-row">
-        <motion.div
-          whileHover={{ backgroundColor: "#e6e5db" }}
-          className="h-10 w-24 select-none cursor-pointer rounded-xl justify-center items-center flex text-black mr-1"
-        >
-          Sing in
-        </motion.div>
-        <motion.div
-          className="bg-red-500 cursor-pointer select-none h-10 w-24 rounded-xl justify-center items-center flex shadow-md shadow-[#454545]"
-          whileHover={{ backgroundColor: "black" }}
-        >
-          Sing up
-        </motion.div>
-      </div> */}
       <Contentt/>
     </div>
   );
