@@ -77,8 +77,9 @@ export default function Page() {
     };
   }, [divRef]);
 
-  const [surfaceArea, setSurfaceArea] = useState("");
+  const [surfaceArea, setSurfaceArea] = useState<string>("");
   const [predictedPrice, setPredictedPrice] = useState(null);
+  const [Secteur, setSecteur] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit1 = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -88,7 +89,7 @@ export default function Page() {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/predict/?surface_area=${surfaceArea}`
+        `http://127.0.0.1:8000/api/predict/?surface_area=${surfaceArea}&Secteur=${Secteur}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -116,6 +117,11 @@ export default function Page() {
     { label: "Bungalow", value: "bungalow" },
     { label: "Ranch", value: "ranch" },
     { label: "Split-Level", value: "split-level" },
+  ];
+
+  const option: Option[] = [
+    { label: "campagne", value: "campagne" },
+    { label: "ville", value: "ville" },
   ];
   return (
     <>
@@ -618,65 +624,83 @@ export default function Page() {
           this is done by comparing the area with Millions of houses in our
           database
         </div>
-          {click1 ? (
-            <motion.form
-              animate={
-                click1
-                  ? { height: 96, width: "66.666666%" }
-                  : { scale: 1, rotate: 0 }
-              }
-              onSubmit={handleSubmit1}
-              className="w-2 bg-white shadow-2xl rounded-2xl px-5 py-2 h-2 justify-between items-center flex mx-auto my-20 flex-row mb-20"
-            >
-              <div className="w-1/4 h-full px-5">
-                <span className="text-zinc-700 font-medium text-lg">
-                  Surface&nbsp;Area&nbsp;(m²):
-                </span>{" "}
-                <br />
-                <input
-                  type="number"
-                  className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 w-3/4 rounded-lg focus:outline-none"
-                  value={surfaceArea}
-                  onChange={(e) => setSurfaceArea(e.target.value)}
-                  required
-                />
+        {click1 ? (
+          <motion.form
+            animate={
+              click1
+                ? { height: 96, width: "66.666666%" }
+                : { scale: 1, rotate: 0 }
+            }
+            onSubmit={handleSubmit1}
+            className="w-2 bg-white shadow-2xl rounded-2xl px-5 py-2 h-2 justify-between items-center flex mx-auto my-20 flex-row mb-20"
+          >
+            <div className="w-1/4 h-full px-5">
+              <span className="text-zinc-700 font-medium text-lg">
+                Surface&nbsp;Area&nbsp;(m²):
+              </span>{" "}
+              <br />
+              <input
+                type="number"
+                className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 w-3/4 rounded-lg focus:outline-none"
+                value={surfaceArea}
+                onChange={(e) => setSurfaceArea(e.target.value)}
+                required
+              />
+            </div>
+            <div className="w-1/4 h-full px-5">
+              <span className="text-zinc-700 font-medium text-lg">
+                Localisation
+              </span>{" "}
+              <br />
+              <select
+                className=" w-full min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 rounded-lg"
+                name="localoitation"
+                value={defaultV.type}
+                onChange={(e) => setSecteur(e.target.value)}
+              >
+                {option.map((option, index) => (
+                  <option key={index} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="w-1/4 h-full px-5">
+              <span className="text-zinc-700 font-medium text-lg mt-5">
+                The&nbsp;prce&nbsp;(DZD):
+              </span>{" "}
+              <br />
+              <div className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 rounded-lg">
+                {predictedPrice && <h2>{predictedPrice}</h2>}
+                {error && <h2 style={{ color: "red" }}>Error: {error}</h2>}
               </div>
-              <div className="w-1/4 h-full px-5">
-                <span className="text-zinc-700 font-medium text-lg mt-5">
-                  The&nbsp;prce&nbsp;(DZD):
-                </span>{" "}
-                <br />
-                <div className="mx-auto min-w-max p-2 bg-zinc-200 justify-center items-center flex text-red-300 h-10 rounded-lg">
-                  {predictedPrice && <h2>{predictedPrice}</h2>}
-                  {error && <h2 style={{ color: "red" }}>Error: {error}</h2>}
-                </div>
-              </div>
-              <div className="w-1/4 h-full justify-end items-center flex">
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.75 }}
-                  className="text-white text-md  cursor-pointer select-none  bg-[#0e012d] h-12 w-3/4 min-w-24 rounded-xl shadow-md shadow-[#454545] justify-center items-center flex"
-                >
-                  Search
-                </motion.button>
-              </div>
-            </motion.form>
-          ) : (
-            <motion.button
-              type="submit"
-              className="text-white text-md my-20 cursor-pointer mx-auto select-none  bg-[#0e012d] h-12 w-48 min-w-24 rounded-2xl shadow-md shadow-[#454545] justify-center items-center flex"
-              animate={
-                click1
-                  ? { height: 96, width: "66.66666%", color: "tr" }
-                  : { scale: 1, rotate: 0 }
-              }
-              whileTap={{ scale: 0.75 }}
-              onClick={handleClick}
-            >
-              search
-            </motion.button>
-          )}
+            </div>
+            <div className="w-1/4 h-full justify-end items-center flex">
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.75 }}
+                className="text-white text-md  cursor-pointer select-none  bg-[#0e012d] h-12 w-3/4 min-w-24 rounded-xl shadow-md shadow-[#454545] justify-center items-center flex"
+              >
+                Search
+              </motion.button>
+            </div>
+          </motion.form>
+        ) : (
+          <motion.button
+            type="submit"
+            className="text-white text-md my-20 cursor-pointer mx-auto select-none  bg-[#0e012d] h-12 w-48 min-w-24 rounded-2xl shadow-md shadow-[#454545] justify-center items-center flex"
+            animate={
+              click1
+                ? { height: 96, width: "66.66666%", color: "tr" }
+                : { scale: 1, rotate: 0 }
+            }
+            whileTap={{ scale: 0.75 }}
+            onClick={handleClick}
+          >
+            search
+          </motion.button>
+        )}
         {/* </div> */}
       </section>
       <Fonted />

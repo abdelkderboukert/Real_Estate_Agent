@@ -6,6 +6,9 @@ from rest_framework import status, generics
 import pandas as pd
 from django.http import JsonResponse
 from sklearn.linear_model import LinearRegression 
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
@@ -16,41 +19,59 @@ from .serializers import UserSerializer
 import numpy as np
 
 
-# Load the Excel file and prepare the model
-file_path = r"C:\Users\HP\Downloads\Prix-Moyen-Au-m²-Algerie.xlsx"
+file_path = r"C:\Users\HP\Downloads\DataSets-02 (1).xlsx"
 df = pd.read_excel(file_path)
 df.dropna(inplace=True)
 
 # Extract input and output values
-list_x = df.iloc[:, 0].tolist()  # Input values
-list_y = df.iloc[:, 1].tolist()  # Output values
+list_x = df.iloc[:, 0].tolist()  # Output values
+list_y1 = df.iloc[:, 1].tolist()  # Input feature 1 (numerical)
+list_y2 = df.iloc[:, 2].tolist()  # Input feature 2 (string)
 
-# Convert lists to numpy arrays
-x = np.array(list_y).reshape(-1, 1)
+X1 = np.array(list_y1).reshape(-1, 1)
 y = np.array(list_x)
 
-# Normalize x
-x_mean = np.mean(x)
-x_std = np.std(x)
+label_encoder = LabelEncoder()
+X2 = label_encoder.fit_transform(list_y2).reshape(-1, 1)  # Convert string to numerical
+
+x = np.hstack((X1, X2))
+
+
+x_mean = np.mean(x, axis=0)
+x_std = np.std(x, axis=0)
 x_normalized = (x - x_mean) / x_std
 
-# Train the model
-model = LinearRegression()
-model.fit(x_normalized, y)
+X_train, X_test, y_train, y_test = train_test_split(x_normalized, y, test_size=0.2, random_state=42)
 
-def predict_price(surface_area):
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f"Mean Absolute Error: {mae:.2f}")
+print(f"Mean Squared Error: {mse:.2f}")
+print(f"R² Score: {r2:.2f}")
+
+def predict_price(surface_area, Secteur):
     # Normalize input surface area before prediction
-    surface_area_normalized = (surface_area - x_mean) / x_std
-    predicted_price = model.predict(np.array([[surface_area_normalized]]))
+    position_encoded = label_encoder.transform([Secteur])[0]
+    Input_normalized = (np.array([[surface_area, position_encoded]]) - x_mean) / x_std
+    predicted_price = model.predict(Input_normalized)
     return predicted_price[0]
 
 def predict_view(request):
     surface_area = request.GET.get('surface_area')
+    Secteur_area = request.GET.get('Secteur')
+    print(surface_area ,Secteur_area)
     
     if surface_area is not None:
         try:
             surface_area = float(surface_area)
-            predicted_price1 = predict_price(surface_area)
+            predicted_price1 = predict_price(surface_area, Secteur_area)
             formatted_price = "{:.2f}".format(predicted_price1)
             return JsonResponse({'predicted_price': formatted_price})
         except ValueError:
