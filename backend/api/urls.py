@@ -11,4 +11,5 @@ urlpatterns = [
     re_path('test_token', test_token),
     path('logout', logout, name='logout'),
     path('predict/', predict_view, name='predict'),
+    path('houseDsply/', houseDsply, name='house')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

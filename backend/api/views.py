@@ -52,9 +52,9 @@ mae = mean_absolute_error(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 
-print(f"Mean Absolute Error: {mae:.2f}")
-print(f"Mean Squared Error: {mse:.2f}")
-print(f"R² Score: {r2:.2f}")
+# print(f"Mean Absolute Error: {mae:.2f}")
+# print(f"Mean Squared Error: {mse:.2f}")
+# print(f"R² Score: {r2:.2f}")
 
 def predict_price(surface_area, Secteur):
     # Normalize input surface area before prediction
@@ -78,6 +78,12 @@ def predict_view(request):
             return JsonResponse({'error': 'Invalid surface area. Please enter a valid number.'}, status=400)
     else:
         return JsonResponse({'error': 'No surface area provided.'}, status=400)
+
+@api_view(['POST'])
+def houseDsply(request):
+    houses = House.objects.all()
+    serializer = HouseSerializer(houses, many=True)
+    return Response(serializer.data)
 
 @api_view(['POST'])
 def signup(request):
@@ -137,8 +143,3 @@ class HouseListCreateView(generics.ListCreateAPIView):
             queryset = queryset.filter(price__lte=max_price)
 
         return queryset
-@api_view(['POST'])
-@authentication_classes([SessionAuthentication, TokenAuthentication])
-class HouseDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = House.objects.all()
-    serializer_class = HouseSerializer

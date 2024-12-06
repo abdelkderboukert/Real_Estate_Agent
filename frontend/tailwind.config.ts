@@ -12,6 +12,9 @@ const config: Config = {
         background: "#eae9f0",
         foreground: "var(--foreground)",
       },
+      backgroundImage: {
+        'zink-blue-zink': 'linear-gradient(to right, #d4d4d8, #e4e4e7, #d4d4d8)',
+      },
     },
   },
   plugins: [],

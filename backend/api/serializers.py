@@ -13,7 +13,7 @@ class HouseImageSerializer(serializers.ModelSerializer):
         fields = ['id', 'image']  # Include 'id' if you want to allow updates
 
 class HouseSerializer(serializers.ModelSerializer):
-    images = HouseImageSerializer(many=True, required=False)  # Nested serializer for images
+    images = HouseImageSerializer(many=True, required=False)
 
     class Meta:
         model = House
